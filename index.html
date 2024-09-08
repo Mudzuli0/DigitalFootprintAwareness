@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Footprint Awareness</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #e5ebec;
+        }
+        .sidebar {
+            width: 100%;
+            background-color: #0288d1;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .sidebar h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar h1 img {
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .sidebar ul li {
+            margin: 15px;
+        }
+        .sidebar ul li a {
+            display: block;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, padding 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar ul li a:hover {
+            background-color: #4fc3f7;
+            color: #01579b;
+        }
+        .sidebar ul li a span {
+            margin-left: 10px;
+        }
+        .hamburger {
+            display: none; /* Hidden by default */
+            cursor: pointer;
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .content h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #0288d1;
+        }
+        .content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .highlight {
+            background-color: #e0f7fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px; /* Space between the boxes */
+            margin-top: 20px;
+        }
+        .box {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+            font-size: 1em;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 220px; /* Adjusted height for square shape */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .box img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+        @media (min-width: 600px) {
+            .sidebar {
+                width: 250px;
+                height: 100vh;
+                position: fixed;
+            }
+            .sidebar h1 {
+                justify-content: flex-start;
+            }
+            .sidebar ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .content {
+                margin-left: 250px;
+                margin-top: 0;
+            }
+            .hamburger {
+                display: none; /* Hidden on larger screens */
+            }
+        }
+        @media (max-width: 599px) {
+            .hamburger {
+                display: block; /* Visible on smaller screens */
+            }
+            .sidebar ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+            }
+            .sidebar ul.show {
+                display: flex;
+            }
+            .grid-container {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1><img src="logo.avif" alt="DigitalGuardian Logo">DigitalGuardian</h1>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <ul id="menu">
+            <li><a href="#" onclick="showContent('digital-footprint')">🔍 <span>Overview</span></a></li>
+            <li><a href="#" onclick="showContent('importance')">🌟 <span>Impact</span></a></li>
+            <li><a href="#" onclick="showContent('guidelines')">🛠️ <span>Management</span></a></li>
+        </ul>
+    </div>
+    <div class="content" id="content">
+        <h1 id="page-title"></h1>
+        <p id="page-content">
+            Welcome to DigitalGuardian, your comprehensive platform for promoting digital awareness and safeguarding online identities.<br /><br />
+            DigitalGuardian is designed to help individuals understand, manage, and protect their digital footprints.<br /><br />
+            This platform provides essential resources, strategies, and insights to foster responsible digital behavior, ensuring that users can navigate the online world safely and confidently.
+        </p>
+    </div>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('show');
+        }
+
+        function showContent(page) {
+            const pageTitle = document.getElementById('page-title');
+            const pageContent = document.getElementById('page-content');
+        
+            if (page === 'digital-footprint') {
+                pageTitle.innerText = 'What is a Digital Footprint?';
+                pageContent.innerHTML = 'A digital footprint refers to the traces of data you leave behind when engaging in various online activities, such as posting on social media, shopping, searching, or sending emails. These footprints form a permanent record of your online behavior and can be used to track and analyze your digital identity.<br /><br />Understanding your digital footprint helps you make informed choices about how you share personal information online and how it impacts your privacy and security.';
+            } else if (page === 'importance') {
+                pageTitle.innerText = 'Impact of Digital Footprints';
+                pageContent.innerHTML = '<p>Your digital footprint plays a crucial role in shaping your online reputation. It can significantly impact how you are perceived by employers, educational institutions, and social connections.</p>' +
+                '<ul>' +
+                '<li><strong>Hiring Decisions:</strong> A 2023 report shows that 70% of employers review candidates\' social media profiles before making hiring decisions.</li>' +
+                '<li><strong>Privacy Risks:</strong> Oversharing or posting inappropriate content can lead to identity theft or privacy breaches. Statistics indicate that 15% of users have experienced identity theft due to improper management of their online presence.</li>' +
+                '</ul>' +
+                '<p class="highlight">Being mindful of what you share and the platforms you use is essential to ensure your digital footprint reflects your best self.</p>';
+            } else if (page === 'guidelines') {
+                pageTitle.innerText = 'Guidelines for Managing Digital Footprints';
+                pageContent.innerHTML = '<div class="grid-container">' +
+                '<div class="box">🔒 <strong>1. Regularly Review Privacy Settings</strong><br />Ensure your social media and other online accounts have the proper privacy settings to restrict access to your information.</div>' +
+                '<div class="box">🔍 <strong>2. Monitor Your Online Presence</strong><br />Search for your name online to see what information appears and ensure there are no unintentional overshares.</div>' +
+                '<div class="box">🚫 <strong>3. Be Mindful of Sharing</strong><br />Avoid sharing sensitive personal details online, especially on public forums or social media.</div>' +
+                '<div class="box">🔐 <strong>4. Use Strong Security Measures</strong><br />Protect your accounts with unique passwords and enable two-factor authentication (2FA) for an extra layer of security.</div>' +
+                '<div class="box">🗑️ <strong>5. Regularly Clean Up Your Footprint</strong><br />Periodically delete old posts, accounts, and data that no longer reflect your current values or professional identity.</div>' +
+                '<div class="box">📈 <strong>6. Stay Updated</strong><br />Stay informed about the latest trends and best practices in digital footprint management and online privacy.</div>' +
+                '</div>';
+            }
+        }
+    </script>
+</body>
+</html>
